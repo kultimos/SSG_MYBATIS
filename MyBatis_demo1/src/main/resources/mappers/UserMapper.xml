@@ -13,4 +13,20 @@
         <!--写sql语句-->
         insert into t_user values(null,'admin','123456',23,'男','12345@qq.com')
     </insert>
+
+    <update id="updateUser">
+        update t_user set username = 'kultimos' where id = 1
+    </update>
+
+    <delete id="deleteUser">
+        delete from t_user where id = 15
+    </delete>
+
+    <select id="selectById" resultType="com.kul.pojo.User">
+        select * from t_user where id = #{id}
+    </select>
+
+    <select id="selectAll" resultType="com.kul.pojo.User" parameterType="string">
+        select * from t_user where username = #{userName}
+    </select>
 </mapper>
