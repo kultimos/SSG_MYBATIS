@@ -26,7 +26,7 @@
         select * from t_user where id = #{id}
     </select>
 
-    <select id="selectAll" resultType="com.kul.pojo.User" parameterType="string">
+    <select id="selectAll" resultType="User" parameterType="string">
         select * from t_user where username = #{userName}
     </select>
 </mapper>

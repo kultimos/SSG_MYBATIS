@@ -4,6 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+    <typeAliases>
+        <!-- typeAlias用来设置类型的别名,type指示全类名,alias表示别名,如果未声明alias,则别名默认是类名,且不区分大小写
+        通过别名即可避免大量书写全类名 -->
+        <typeAlias type="com.kul.pojo.User" alias="User"/>
+        
+        <!--相比于typeAlias,package更加好用
+         package的原理是:以name指定的包为单位,将该包下的所有类设置为默认别名即不区分大小写的类名-->
+        <package name="com.kul.pojo"/>
+    </typeAliases>
+
     <!--设置连接数据库的环境-->
     <environments default="development">
         <environment id="development">
@@ -20,7 +30,12 @@
     </environments>
 
     <!--引入映射文件-->
+<!--    <mappers>-->
+<!--        <mapper resource="mappers/UserMapper.xml"/>-->
+<!--    </mappers>-->
+
+<!--引入该包下的所有映射文件,需要注意的是该报名结构必须与java下的mapper的包名结构完全一致-->
     <mappers>
-        <mapper resource="mappers/UserMapper.xml"/>
+        <package name="com.kul.mapper"/>
     </mappers>
 </configuration>
