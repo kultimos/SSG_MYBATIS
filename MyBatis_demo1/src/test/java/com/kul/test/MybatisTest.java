@@ -1,3 +1,5 @@
+package com.kul.test;
+
 import com.kul.mapper.UserMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -8,7 +10,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class TestInsert {
+public class MybatisTest {
 
 
     @Test
@@ -18,8 +20,8 @@ public class TestInsert {
         SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
         //获取sqlSessionFactory对象
         SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(is);
-        //获取sql的会话对象SqlSession,MyBatis提供的操作数据库的对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
+        //获取sql的会话对象SqlSession,MyBatis提供的操作数据库的对象,参数true表示自动提交事务
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
         //获取UserMapper的代理实现类对象
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -27,7 +29,7 @@ public class TestInsert {
         int result = userMapper.insertUser();
         System.out.println("结果：" + result);
         //提交事务
-        sqlSession.commit();
+//        sqlSession.commit();
         //关闭会话
         sqlSession.close();
     }

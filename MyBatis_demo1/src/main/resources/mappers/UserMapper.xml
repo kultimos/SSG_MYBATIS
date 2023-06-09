@@ -11,6 +11,6 @@
     <!--方法名与id保持一致，int insertUser();-->
     <insert id="insertUser">
         <!--写sql语句-->
-        insert into t_user values(2,'admin','123456',23,'男','12345@qq.com')
+        insert into t_user values(null,'admin','123456',23,'男','12345@qq.com')
     </insert>
 </mapper>
