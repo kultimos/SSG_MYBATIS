@@ -1,0 +1,8 @@
+在部分初始的环境配置时需要注意的几点
+首先是多个文件之间的映射关系
+    1.resources下的mybatis-config.xml中通过<mappers>标签引入了resources下的mappers/UserMapper.xml文件,
+使得UserMapper.xml中的sql语句可以被mybatis-config.xml中的配置文件所识别,进而操作数据库
+    2.resources下的mappers/UserMapper.xml中通过<mapper>标签引入了pojo中的实体类User.java文件,目前还没有绑定;
+    resources下的mappers/UserMapper.xml中进行sql语句的编写
+    resources下的mappers/UserMapper.xml通过namespace指定全类名的方式与UserMapper接口进行映射
+    3.pojo中的实体类User应通过注解@Table(name = "t_user")与数据库中的t_user表进行映射,目前还没有使用注解,后续会说这个问题
