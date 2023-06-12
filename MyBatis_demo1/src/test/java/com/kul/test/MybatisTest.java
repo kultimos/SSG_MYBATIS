@@ -10,7 +10,10 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class MybatisTest {
 
@@ -31,9 +34,17 @@ public class MybatisTest {
 //        int result = userMapper.insertUser();
 //        System.out.println("结果：" + result);
 //        userMapper.updateUser();
-        User user = userMapper.selectById(1);
-        List<User> useList = userMapper.selectAll("admin");
-        System.out.println(useList);
+
+//        List<User> useList = userMapper.selectAll("kultimos");
+//        System.out.println(useList);
+//        User kultimos = userMapper.checkLogin("kultimos", "123456");
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("userName", "kultimos");
+//        map.put("password", "123456");
+//        User user = userMapper.checkLoginByMap(map);
+//        System.out.println(user);
+        User user = userMapper.selectById(User.builder().id(1).build());
+        System.out.println(user);
         //提交事务
 //        sqlSession.commit();
         //关闭会话

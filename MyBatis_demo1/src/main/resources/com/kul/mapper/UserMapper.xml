@@ -22,11 +22,41 @@
         delete from t_user where id = 15
     </delete>
 
-    <select id="selectById" resultType="com.kul.pojo.User">
-        select * from t_user where id = #{id}
+    <select id="selectById" resultType="com.kul.pojo.User" parameterType="User">
+        select * from t_user where id = '${id}'
     </select>
 
     <select id="selectAll" resultType="User" parameterType="string">
-        select * from t_user where username = #{userName}
+        select * from t_user where username = '${username}'
+    </select>
+
+    <select id="checkLogin" resultType="User" parameterType="string" >
+        select * from t_user where username = '${userName}' and password = #{password}
+    </select>
+
+
+    <select id="checkLoginByMap" resultType="User" parameterType="map" >
+        select * from t_user where username = '${userName}' and password = #{password}
     </select>
 </mapper>
+
+
+<!--mybatis获取参数值的两种方式
+    ${} #{}
+${} 本质是字符串拼接    使用时需要加单引号
+#{} 本质是占位符  优先选用    使用时直接用
+
+1.如果只有一个参数,则{}中的内容可以随意写,但是如果有多个参数,则{}中的内容必须和形参名一致————selectAll
+2.如果有多个参数,Mybatis默认使用的是@Param注解,如果没有@Param注解,则使用arg0,arg1,arg2...或者param1,param2作为参数名;
+  按照方法形参顺序进行匹配;第一个参数就是arg0或者param1,第二个参数就是arg1或者param2,以此类推;但是这种很少用,因为不直观;通
+  常我们都是使用@Param注解来指定参数名,这样就不用按照顺序来匹配了,直接使用@Param注解中的value值作为参数名即可————checkLogin
+3.若参数有多个时,可以手动将这些参数放在一个map中,然后在sql语句中使用map中的key来获取对应的value值————checkLoginByMap
+4.如果传来的是一个对象参数,则可以直接使用对象的属性名来获取对应的值,但是需要注意的是,如果对象中的属性名和数据库中的字段名不一致,
+  则需要在sql语句中使用别名来获取对应的值————selectById
+  有时候数据库名和实体类无法一一对应是办法的,因为可能数据库里这个字段是paas_algo_id,而实体类中叫paasAlgoId,这时候就需要使用别名了;
+  通过下图这种方式来指定在对应关系,之后在mapper中读取对象属性的时候就可以认为paas_algo_id就是该User的属性名了
+  @Column(name = "paas_algo_id")
+  private String paasAlgoId;
+5.@Param注解————checkLogin
+其实多种方式本质上是利用map的key-value来获取对应的值,只不过有的是Mybatis自动帮我们封装了,有的是我们手动封装的
+-->
