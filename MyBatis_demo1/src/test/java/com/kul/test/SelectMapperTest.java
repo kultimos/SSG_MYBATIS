@@ -79,4 +79,10 @@ public class SelectMapperTest {
     public void testSelectByTableName() {
         sqlMapper.selectByTableName("t_user").forEach(System.out::println);
     }
+
+    @Test
+    public void insertAutoKey() {
+        //没有设置id,在mapper中设置了useGeneratedKeys="true" keyProperty="id",可以会自动将自增的id赋值给user对象
+        sqlMapper.insertAutoKey(User.builder().age(55).userName("穆托姆博").sex("男").email("mutomubo@163.com").password("123456").build());
+    }
 }

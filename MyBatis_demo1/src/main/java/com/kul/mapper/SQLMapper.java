@@ -13,4 +13,6 @@ public interface SQLMapper {
     void deleteIn(List<Integer> userNameList);
 
     List<User> selectByTableName(String tableName);
+
+    Integer insertAutoKey(User user);
 }
