@@ -5,10 +5,10 @@
 <configuration>
 
 
-    <settings>
+<!--    <settings>-->
 <!--  处理字段不一致的方法2：通过全局配置将_自动映射为驼峰   -->
-        <setting name="mapUnderscoreToCamelCase" value="true"/>
-    </settings>
+<!--        <setting name="mapUnderscoreToCamelCase" value="true"/>-->
+<!--    </settings>-->
 
     <typeAliases>
         <!-- typeAlias用来设置类型的别名,type指示全类名,alias表示别名,如果未声明alias,则别名默认是类名,且不区分大小写

@@ -16,7 +16,22 @@
 <!--        select eid,emp_name as empName,age,sex,email,did  from t_emp-->
 <!--    </select>-->
 
-    <select id="selectT" resultType="Emp">
+<!--  自定义resultMap来处理数据表和类之间的字段问题,这里建议是把每个字段都写上
+      id:表示该自定义resultMap的唯一标识
+      type:表示该自定义resultMap映射的类的全类名
+      但是呢,相比于处理单个表与类之间的字段不一致,我们更多时候是用resultMap来处理一对多、多对一的结果映射问题
+ -->
+    <resultMap id="empResultMap" type="Emp">
+        <id property="eid" column="eid"></id>
+        <id property="empName" column="emp_name"></id>
+        <id property="email" column="email"></id>
+        <id property="sex" column="sex"></id>
+        <id property="age" column="age"></id>
+        <id property="did" column="did"></id>
+    </resultMap>
+
+<!--  使用自定义的resultMap来将数据映射到类中 -->
+    <select id="selectT" resultMap="empResultMap">
         select *  from t_emp
     </select>
 </mapper>
