@@ -1,7 +1,6 @@
-package com.kul.test;
+package com.kul.pojo.test;
 
-import com.kul.mapper.UserMapper;
-import com.kul.pojo.User;
+import com.kul.pojo.mapper.UserMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -10,10 +9,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public class MybatisTest {
 

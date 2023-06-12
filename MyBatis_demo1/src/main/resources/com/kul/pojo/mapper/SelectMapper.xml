@@ -7,7 +7,7 @@
     1.mapper接口全类名和映射文件namespace一致
     2.mapper接口的方法名和映射文件sql的id保持一致
 -->
-<mapper namespace="com.kul.mapper.SelectMapper">
+<mapper namespace="com.kul.pojo.mapper.SelectMapper">
     <select id="selectById" parameterType="Integer" resultType="User">
         select * from t_user where id = #{id}
     </select>

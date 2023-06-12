@@ -1,11 +1,10 @@
-package com.kul.mapper;
+package com.kul.pojo.mapper;
 
-import com.kul.pojo.User;
+import com.kul.pojo.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public interface UserMapper {
     int insertUser();

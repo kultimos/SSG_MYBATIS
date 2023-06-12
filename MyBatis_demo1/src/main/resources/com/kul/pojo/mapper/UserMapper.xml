@@ -7,7 +7,7 @@
     1.mapper接口全类名和映射文件namespace一致
     2.mapper接口的方法名和映射文件sql的id保持一致
 -->
-<mapper namespace="com.kul.mapper.UserMapper">
+<mapper namespace="com.kul.pojo.mapper.UserMapper">
     <!--方法名与id保持一致，int insertUser();-->
     <insert id="insertUser">
         <!--写sql语句-->
@@ -22,7 +22,7 @@
         delete from t_user where id = 15
     </delete>
 
-    <select id="selectById" resultType="com.kul.pojo.User" parameterType="User">
+    <select id="selectById" resultType="com.kul.pojo.pojo.User" parameterType="User">
         select * from t_user where id = '${id}'
     </select>
 

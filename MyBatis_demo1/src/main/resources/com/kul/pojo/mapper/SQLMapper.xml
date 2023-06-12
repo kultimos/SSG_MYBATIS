@@ -7,7 +7,7 @@
     1.mapper接口全类名和映射文件namespace一致
     2.mapper接口的方法名和映射文件sql的id保持一致
 -->
-<mapper namespace="com.kul.mapper.SQLMapper">
+<mapper namespace="com.kul.pojo.mapper.SQLMapper">
 <!--    在进行模糊查询时${} 和 #{} 是存在区别的,我们这里一共有三种书写方式,我比较喜欢concat这种-->
 <!--             SELECT * FROM t_user WHERE username LIKE '%${username}%'-->
 <!--             select * from t_user where username like "%"#{username}"%"-->

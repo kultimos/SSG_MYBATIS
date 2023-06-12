@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Mapper接口对应映射文件
+    mapper接口和映射文件要保持两个一致
+    1.mapper接口全类名和映射文件namespace一致
+    2.mapper接口的方法名和映射文件sql的id保持一致
+-->
+<mapper namespace="com.kul.mapper.DeptMapper">
+
+</mapper>

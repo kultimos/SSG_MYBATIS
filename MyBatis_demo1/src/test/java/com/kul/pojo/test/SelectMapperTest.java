@@ -1,10 +1,9 @@
-package com.kul.test;
+package com.kul.pojo.test;
 
 
-import com.kul.mapper.SQLMapper;
-import com.kul.mapper.SelectMapper;
-import com.kul.mapper.UserMapper;
-import com.kul.pojo.User;
+import com.kul.pojo.mapper.SQLMapper;
+import com.kul.pojo.mapper.SelectMapper;
+import com.kul.pojo.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

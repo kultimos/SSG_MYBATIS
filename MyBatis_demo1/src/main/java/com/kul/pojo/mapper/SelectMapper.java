@@ -1,6 +1,6 @@
-package com.kul.mapper;
+package com.kul.pojo.mapper;
 
-import com.kul.pojo.User;
+import com.kul.pojo.pojo.User;
 import org.apache.ibatis.annotations.MapKey;
 
 import java.util.List;

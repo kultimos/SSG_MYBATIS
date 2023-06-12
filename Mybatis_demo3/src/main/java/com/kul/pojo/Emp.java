@@ -2,24 +2,23 @@ package com.kul.pojo;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class User {
-    private Integer id;
+public class Emp {
 
-    private String userName;
+    private Integer eid;
 
-    private String password;
+    private String empName;
 
-    private Integer age;
+    private String age;
 
     private String sex;
 
     private String email;
+
+    private String did;
 }

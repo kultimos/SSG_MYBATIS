@@ -7,7 +7,6 @@
     <typeAliases>
         <!-- typeAlias用来设置类型的别名,type指示全类名,alias表示别名,如果未声明alias,则别名默认是类名,且不区分大小写
         通过别名即可避免大量书写全类名 -->
-        <typeAlias type="com.kul.pojo.pojo.User" alias="User"/>
         
         <!--相比于typeAlias,package更加好用
          package的原理是:以name指定的包为单位,将该包下的所有类设置为默认别名即不区分大小写的类名-->
