@@ -35,16 +35,16 @@ public class MybatisTest {
 //        System.out.println("结果：" + result);
 //        userMapper.updateUser();
 
-//        List<User> useList = userMapper.selectAll("kultimos");
-//        System.out.println(useList);
+        List<User> useList = userMapper.selectAll("kultimos");
+        System.out.println(useList);
 //        User kultimos = userMapper.checkLogin("kultimos", "123456");
 //        Map<String, Object> map = new HashMap<>();
 //        map.put("userName", "kultimos");
 //        map.put("password", "123456");
 //        User user = userMapper.checkLoginByMap(map);
+////        System.out.println(user);
+//        User user = userMapper.selectById(User.builder().id(1).build());
 //        System.out.println(user);
-        User user = userMapper.selectById(User.builder().id(1).build());
-        System.out.println(user);
         //提交事务
 //        sqlSession.commit();
         //关闭会话

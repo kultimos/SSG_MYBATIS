@@ -7,3 +7,5 @@
     resources下的mappers/UserMapper.xml通过namespace指定全类名的方式与UserMapper接口进行映射
     resources下的mappers/UserMapper.xml中通过id指定方法名的方式与UserMapper接口中的方法进行映射
     3.pojo中的实体类User应通过注解@Table(name = "t_user")与数据库中的t_user表进行映射,目前还没有使用注解,后续会说这个问题
+
+
