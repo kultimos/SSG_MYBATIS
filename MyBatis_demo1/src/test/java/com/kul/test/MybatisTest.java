@@ -31,12 +31,12 @@ public class MybatisTest {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         //调用Mapper接口的方法，实现添加用户信息的功能
-//        int result = userMapper.insertUser();
+        int result = userMapper.insertUser();
 //        System.out.println("结果：" + result);
 //        userMapper.updateUser();
 
-        List<User> useList = userMapper.selectAll("kultimos");
-        System.out.println(useList);
+//        List<User> useList = userMapper.selectAll("kultimos");
+//        System.out.println(useList);
 //        User kultimos = userMapper.checkLogin("kultimos", "123456");
 //        Map<String, Object> map = new HashMap<>();
 //        map.put("userName", "kultimos");
