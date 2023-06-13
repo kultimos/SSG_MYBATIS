@@ -7,4 +7,8 @@ import java.util.List;
 public interface EmpMapper {
 
     List<Emp> selectT();
+
+    Emp selectDetailInfo(Integer eid);
+
+    Emp getEmpAndDeptByStepOne(Integer eid);
 }

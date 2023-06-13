@@ -9,4 +9,12 @@
 -->
 <mapper namespace="com.kul.mapper.DeptMapper">
 
+    <resultMap id="deptMap" type="Dept">
+        <id property="did" column="did"></id>
+        <result property="deptName" column="dept_name"></result>
+    </resultMap>
+
+    <select id="getEmpAndDeptByStepTwo" resultMap="deptMap">
+        select * from t_dept where did = #{did}
+    </select>
 </mapper>

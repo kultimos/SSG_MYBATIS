@@ -32,4 +32,14 @@ public class EmpTest {
     public void test() {
         empMapper.selectT().forEach(System.out::println);
     }
+
+    @Test
+    public void test2() {
+        System.out.println(empMapper.selectDetailInfo(3));
+    }
+
+    @Test
+    public void test3() {
+        System.out.println(empMapper.getEmpAndDeptByStepOne(4));
+    }
 }

@@ -20,18 +20,77 @@
       id:表示该自定义resultMap的唯一标识
       type:表示该自定义resultMap映射的类的全类名
       但是呢,相比于处理单个表与类之间的字段不一致,我们更多时候是用resultMap来处理一对多、多对一的结果映射问题
+      我们通常习惯用id来设置主键的映射,用result来设置普通字段的映射 这个要规范！按照这个规范来写
  -->
     <resultMap id="empResultMap" type="Emp">
         <id property="eid" column="eid"></id>
-        <id property="empName" column="emp_name"></id>
-        <id property="email" column="email"></id>
-        <id property="sex" column="sex"></id>
-        <id property="age" column="age"></id>
-        <id property="did" column="did"></id>
+        <result property="empName" column="emp_name"></result>
+        <result property="email" column="email"></result>
+        <result property="sex" column="sex"></result>
+        <result property="age" column="age"></result>
+        <result property="did" column="did"></result>
     </resultMap>
 
 <!--  使用自定义的resultMap来将数据映射到类中 -->
     <select id="selectT" resultMap="empResultMap">
         select *  from t_emp
+    </select>
+
+
+<!--  处理多对一的问题  -->
+<!--   1.通过级联属性赋值的方式处理多对一问题 -->
+    <resultMap id="empAndDeptResultMapOne" type="Emp">
+        <id property="eid" column="eid"></id>
+        <result property="age" column="age"></result>
+        <result property="email" column="email"></result>
+        <result property="empName" column="emp_name"></result>
+        <result property="sex" column="sex"></result>
+        <result property="did" column="did"></result>
+        <result property="dept.did" column="did"></result>
+        <result property="dept.deptName" column="dept_name"></result>
+    </resultMap>
+
+
+<!--  2.通过association标签来处理多对一问题
+      association标签的外层的property表示要进行多对一映射的那个字段 javaType表示该映射字段的java类型即全类名
+      而在association标签的内层规则与resultMap标签的规则一致,id用来表示主键的映射,result用来表示普通字段的映射
+-->
+    <resultMap id="empAndDeptResultMapTwo" type="Emp">
+        <id property="eid" column="eid"></id>
+        <result property="age" column="age"></result>
+        <result property="email" column="email"></result>
+        <result property="empName" column="emp_name"></result>
+        <result property="sex" column="sex"></result>
+        <result property="did" column="did"></result>
+        <association property="dept" javaType="Dept">
+            <id property="did" column="did"></id>
+            <result property="deptName" column="dept_name"></result>
+        </association>
+    </resultMap>
+
+
+
+<!--  3.分步查询
+      这里的assoation的property指的是要进行多对一映射的那个字段,select指的是要调用的方法,因为该方法不一定在当前mapper中,所以要写全路径
+      colomn指的是要传入的参数,这里的参数是上面select指定的方法的参数,这里的参数是#{did}
+      分步查询就是说利用select和column将第一次查询的某个字段传入到第二次查询中,然后第二次查询的结果映射到第一次查询的结果中
+-->
+    <resultMap id="empAndDeptResultMapThree" type="Emp">
+        <id property="eid" column="eid"></id>
+        <result property="age" column="age"></result>
+        <result property="email" column="email"></result>
+        <result property="empName" column="emp_name"></result>
+        <result property="sex" column="sex"></result>
+        <result property="did" column="did"></result>
+        <association property="dept" select="com.kul.mapper.DeptMapper.getEmpAndDeptByStepTwo" column="did"></association>
+    </resultMap>
+    
+    <select id="getEmpAndDeptByStepOne" resultMap="empAndDeptResultMapThree">
+        select * from t_emp where eid = #{eid}
+    </select>
+
+
+    <select id="selectDetailInfo" resultMap="empAndDeptResultMapTwo" parameterType="int">
+        select * from t_emp a left join t_dept b on a.did = b.did having a.eid = #{eid}
     </select>
 </mapper>

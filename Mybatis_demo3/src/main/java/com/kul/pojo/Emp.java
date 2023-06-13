@@ -21,4 +21,6 @@ public class Emp {
     private String email;
 
     private String did;
+
+    private Dept dept;
 }
