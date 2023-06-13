@@ -1,5 +1,6 @@
 package com.kul.test;
 
+import com.kul.mapper.DeptMapper;
 import com.kul.mapper.EmpMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -15,6 +16,8 @@ public class EmpTest {
 
     private EmpMapper empMapper;
 
+    private DeptMapper deptMapper;
+
     @Before
     public void init() throws IOException {
         InputStream is = Resources.getResourceAsStream("mybatis-config.xml");
@@ -26,6 +29,7 @@ public class EmpTest {
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
         //获取UserMapper的代理实现类对象
         empMapper = sqlSession.getMapper(EmpMapper.class);
+        deptMapper = sqlSession.getMapper(DeptMapper.class);
     }
 
     @Test
@@ -41,5 +45,12 @@ public class EmpTest {
     @Test
     public void test3() {
         System.out.println(empMapper.getEmpAndDeptByStepOne(4).getEmpName());
+    }
+
+    @Test
+    public void test4() {
+        System.out.println(deptMapper.getDeptAndEmpInfo(1));
+        System.out.println("------------------------------------");
+        System.out.println(empMapper.selectEmpByDid(1));
     }
 }

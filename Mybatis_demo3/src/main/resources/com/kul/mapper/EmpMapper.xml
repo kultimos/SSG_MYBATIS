@@ -103,4 +103,11 @@
     <select id="selectDetailInfo" resultMap="empAndDeptResultMapTwo" parameterType="int">
         select * from t_emp a left join t_dept b on a.did = b.did having a.eid = #{eid}
     </select>
+
+
+
+
+    <select id="selectEmpByDid" resultMap="empResultMap">
+        select * from t_emp where did = #{did}
+    </select>
 </mapper>

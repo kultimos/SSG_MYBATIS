@@ -17,4 +17,39 @@
     <select id="getEmpAndDeptByStepTwo" resultMap="deptMap">
         select * from t_dept where did = #{did}
     </select>
+
+
+
+<!--  处理一对多映射关系
+      1.单条语句查询时直接应用collection标签
+      需要注意这里collection中使用的是ofType而不是association中的javaType  -->
+    <resultMap id="deptAndEmpInfoMap" type="Dept">
+        <id property="did" column="did"></id>
+        <result property="deptName" column="dept_name"></result>
+        <collection property="empList" ofType="Emp">
+            <id property="eid" column="eid"></id>
+            <result property="age" column="age"></result>
+            <result property="email" column="email"></result>
+            <result property="empName" column="emp_name"></result>
+            <result property="sex" column="sex"></result>
+            <result property="did" column="did"></result>
+        </collection>
+    </resultMap>
+
+<!--  2.分步查询     -->
+
+
+
+    <resultMap id="deptAndEmpInfoByStep" type="Dept">
+        <id property="did" column="did"></id>
+        <result property="deptName" column="dept_name"></result>
+        <collection property="empList"  column="did" ofType="Emp" select="com.kul.mapper.EmpMapper.selectEmpByDid">
+        </collection>
+    </resultMap>
+
+
+
+    <select id="getDeptAndEmpInfo" resultMap="deptAndEmpInfoByStep">
+        select * from t_dept where did = #{did}
+    </select>
 </mapper>

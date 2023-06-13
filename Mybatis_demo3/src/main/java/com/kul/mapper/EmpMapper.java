@@ -11,4 +11,6 @@ public interface EmpMapper {
     Emp selectDetailInfo(Integer eid);
 
     Emp getEmpAndDeptByStepOne(Integer eid);
+
+    List<Emp> selectEmpByDid(Integer did);
 }
