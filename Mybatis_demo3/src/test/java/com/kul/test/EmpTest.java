@@ -40,6 +40,6 @@ public class EmpTest {
 
     @Test
     public void test3() {
-        System.out.println(empMapper.getEmpAndDeptByStepOne(4));
+        System.out.println(empMapper.getEmpAndDeptByStepOne(4).getEmpName());
     }
 }

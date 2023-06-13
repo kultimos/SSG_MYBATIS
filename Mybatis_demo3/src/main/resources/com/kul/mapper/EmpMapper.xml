@@ -62,7 +62,7 @@
         <result property="empName" column="emp_name"></result>
         <result property="sex" column="sex"></result>
         <result property="did" column="did"></result>
-        <association property="dept" javaType="Dept">
+        <association property="dept" javaType="Dept" >
             <id property="did" column="did"></id>
             <result property="deptName" column="dept_name"></result>
         </association>
@@ -73,6 +73,16 @@
 <!--  3.分步查询
       这里的assoation的property指的是要进行多对一映射的那个字段,select指的是要调用的方法,因为该方法不一定在当前mapper中,所以要写全路径
       colomn指的是要传入的参数,这里的参数是上面select指定的方法的参数,这里的参数是#{did}
+      fetchType:表示查询的时候是立即查询还是延迟查询,默认是立即查询,如果是延迟查询,那么在使用到该字段的时候才会去查询
+
+      延迟加载:当前我们这个分步查询是分成两个部分,第一步查员工,第二步查部门,
+        默认情况下就是一次性查出了员工信息和其所属部门的部门信息————那么此时是两条sql
+        但是呢,因为我们分步查询实际上是基本语句的拼接,这些语句本身也会被复用,那么当我只想查某个id对应的员工名称时,实际上是不需要后续的部门信息的
+      可是按照我们当前的写法依然会进行部门信息的查询,依然是两条sql,这样就造成了资源的浪费
+        所以我们可以设置延迟加载,这样就只会查询员工信息,当我们需要部门信息的时候才会去查询—————这样就只有一条sql
+       延迟加载可以通过国fetchType:lazy来设置,默认是eager,即立即加载,如果设置为lazy,那么就是延迟加载
+       也可以在mybatis-config.xml全局文件中配置 <setting name="lazyLoadingEnabled" value="true"/>
+
       分步查询就是说利用select和column将第一次查询的某个字段传入到第二次查询中,然后第二次查询的结果映射到第一次查询的结果中
 -->
     <resultMap id="empAndDeptResultMapThree" type="Emp">
@@ -82,7 +92,7 @@
         <result property="empName" column="emp_name"></result>
         <result property="sex" column="sex"></result>
         <result property="did" column="did"></result>
-        <association property="dept" select="com.kul.mapper.DeptMapper.getEmpAndDeptByStepTwo" column="did"></association>
+        <association property="dept" select="com.kul.mapper.DeptMapper.getEmpAndDeptByStepTwo" column="did" fetchType="eager"></association>
     </resultMap>
     
     <select id="getEmpAndDeptByStepOne" resultMap="empAndDeptResultMapThree">
