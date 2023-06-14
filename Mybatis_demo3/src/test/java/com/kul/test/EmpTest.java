@@ -1,7 +1,9 @@
 package com.kul.test;
 
 import com.kul.mapper.DeptMapper;
+import com.kul.mapper.DynamicSQLMapper;
 import com.kul.mapper.EmpMapper;
+import com.kul.pojo.Emp;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -11,12 +13,15 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class EmpTest {
 
     private EmpMapper empMapper;
 
     private DeptMapper deptMapper;
+
+    private DynamicSQLMapper dynamicSQLMapper;
 
     @Before
     public void init() throws IOException {
@@ -30,6 +35,7 @@ public class EmpTest {
         //获取UserMapper的代理实现类对象
         empMapper = sqlSession.getMapper(EmpMapper.class);
         deptMapper = sqlSession.getMapper(DeptMapper.class);
+        dynamicSQLMapper = sqlSession.getMapper(DynamicSQLMapper.class);
     }
 
     @Test
@@ -52,5 +58,11 @@ public class EmpTest {
         System.out.println(deptMapper.getDeptAndEmpInfo(1));
         System.out.println("------------------------------------");
         System.out.println(empMapper.selectEmpByDid(1));
+    }
+
+    @Test
+    public void test5() {
+        List<Emp> empList = dynamicSQLMapper.getEmpByCondition(Emp.builder().empName("张三").eid(1).build());
+        System.out.println(empList);
     }
 }

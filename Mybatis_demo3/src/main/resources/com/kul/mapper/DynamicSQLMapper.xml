@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Mapper接口对应映射文件
+    mapper接口和映射文件要保持两个一致
+    1.mapper接口全类名和映射文件namespace一致
+    2.mapper接口的方法名和映射文件sql的id保持一致
+-->
+<mapper namespace="com.kul.mapper.DynamicSQLMapper">
+
+<!--  这里的1=1是为了避免一些特殊情况导致where 和 and 相连  -->
+    <select id="getEmpByCondition" parameterType="Emp" resultMap="com.kul.mapper.EmpMapper.empResultMap">
+        select * from t_emp where 1=1
+        <if test="eid != null and eid != ''">
+            and eid=#{eid}
+        </if>
+        <if test="age != null and age != ''">
+            and age=#{age}
+        </if>
+        <if test="sex != null and sex != ''">
+            and sex=#{sex}
+        </if>
+        <if test="email != null and email != ''">
+            and email=#{email}
+        </if>
+        <if test="empName != null and empName != ''">
+            and emp_name=#{empName}
+        </if>
+    </select>
+
+</mapper>
