@@ -62,7 +62,7 @@ public class EmpTest {
 
     @Test
     public void test5() {
-        List<Emp> empList = dynamicSQLMapper.getEmpByCondition(Emp.builder().empName("уехЩ").eid(1).build());
+        List<Emp> empList = dynamicSQLMapper.getEmpByConditionTwo(Emp.builder().build());
         System.out.println(empList);
     }
 }

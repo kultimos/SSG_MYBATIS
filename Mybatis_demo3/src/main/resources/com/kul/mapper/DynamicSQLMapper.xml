@@ -10,7 +10,7 @@
 <mapper namespace="com.kul.mapper.DynamicSQLMapper">
 
 <!--  这里的1=1是为了避免一些特殊情况导致where 和 and 相连  -->
-    <select id="getEmpByCondition" parameterType="Emp" resultMap="com.kul.mapper.EmpMapper.empResultMap">
+    <select id="getEmpByConditionOne" parameterType="Emp" resultMap="com.kul.mapper.EmpMapper.empResultMap">
         select * from t_emp where 1=1
         <if test="eid != null and eid != ''">
             and eid=#{eid}
@@ -27,6 +27,34 @@
         <if test="empName != null and empName != ''">
             and emp_name=#{empName}
         </if>
+    </select>
+
+
+<!--  where标签:
+      当where标签中有内容时,会自动生成where关键字,并且将内容前多余的and或or去掉
+      当where标签中没有内容时,不会生成where关键字
+      需要注意的是,1.where标签中只能有if标签,不能有其他标签 2.where标签只能去掉第一个多余的and或or,不能去掉其他的,若and或or写在后面,则不会去掉
+
+-->
+    <select id="getEmpByConditionTwo" parameterType="Emp" resultMap="com.kul.mapper.EmpMapper.empResultMap">
+        select * from t_emp
+        <where>
+            <if test="eid != null and eid != ''">
+                and eid=#{eid}
+            </if>
+            <if test="age != null and age != ''">
+                and age=#{age}
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex=#{sex}
+            </if>
+            <if test="email != null and email != ''">
+                and email=#{email}
+            </if>
+            <if test="empName != null and empName != ''">
+                and emp_name=#{empName}
+            </if>
+        </where>
     </select>
 
 </mapper>

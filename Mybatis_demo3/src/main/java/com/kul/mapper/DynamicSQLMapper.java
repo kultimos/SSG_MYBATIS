@@ -10,5 +10,7 @@ public interface DynamicSQLMapper {
     /**
      * 使用动态SQL进行多条件查询
      */
-    List<Emp> getEmpByCondition(Emp emp);
+    List<Emp> getEmpByConditionOne(Emp emp);
+
+    List<Emp> getEmpByConditionTwo(Emp emp);
 }
