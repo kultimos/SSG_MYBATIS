@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmpTest {
@@ -76,5 +77,18 @@ public class EmpTest {
     public void test7() {
         Integer[] eids = {7,8};
         System.out.println(dynamicSQLMapper.deleteMoreByOr(eids));
+    }
+
+    @Test
+    public void test8() {
+        Emp emp1 = Emp.builder().eid(10).empName("字母").sex("密尔沃基").age("29").email("希腊").build();
+        Emp emp2 = Emp.builder().eid(11).empName("邓肯").sex("安东尼奥").age("40").email("美国").build();
+        Emp emp3 = Emp.builder().eid(12).empName("德克").sex("达拉斯加").age("42").email("德国").build();
+        List<Emp> list = new ArrayList<>();
+        list.add(emp1);
+        list.add(emp2);
+        list.add(emp3);
+        int a = dynamicSQLMapper.insertMoreByArray(list);
+        System.out.println(a);
     }
 }

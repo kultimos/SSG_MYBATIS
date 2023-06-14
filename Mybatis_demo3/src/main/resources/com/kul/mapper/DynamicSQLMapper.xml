@@ -137,4 +137,20 @@
 
     </delete>
 
+    <insert id="insertMoreByArray">
+        insert into t_emp values
+        <foreach collection="emps" item="item"  separator=",">
+           ( #{item.eid} ,
+            #{item.empName} ,
+            #{item.age},
+            #{item.sex},
+            #{item.email},
+            #{item.did})
+        </foreach>
+    </insert>
+
+    <insert id="s">
+
+    </insert>
+
 </mapper>
