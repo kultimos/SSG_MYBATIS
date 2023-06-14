@@ -116,5 +116,25 @@
         </where>
     </select>
 
+<!--  这里的注意点:
+      collection的内容要跟我们mapper类中的@Param注解修饰的一致,这样才可以找到
+      item表示的只是针对当前collection进行循环的每一个元素
+-->
+    <delete id="deleteMoreByArray" parameterType="arraylist">
+        delete from t_emp where eid in
+        <foreach collection="eids" item="eid" open="(" close=")" separator=",">
+             #{eid}
+        </foreach>
+    </delete>
+
+    <delete id="deleteMoreByOr">
+        delete from t_emp
+        <where>
+            <foreach collection="eids" item="eid" separator="or">
+                eid=#{eid}
+            </foreach>
+        </where>
+
+    </delete>
 
 </mapper>

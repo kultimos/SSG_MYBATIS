@@ -1,6 +1,7 @@
 package com.kul.mapper;
 
 import com.kul.pojo.Emp;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,7 +17,9 @@ public interface DynamicSQLMapper {
 
     List<Emp> getEmpByConditionThree(Emp emp);
 
-
-
     List<Emp> getEmpByChoose(Emp emp);
+
+    int deleteMoreByArray(@Param("eids") Integer[] eids);
+
+    int deleteMoreByOr(@Param("eids") Integer[] eids);
 }

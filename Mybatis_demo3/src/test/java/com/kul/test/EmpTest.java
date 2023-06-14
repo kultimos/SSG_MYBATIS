@@ -71,4 +71,10 @@ public class EmpTest {
         List<Emp> empList = dynamicSQLMapper.getEmpByChoose(Emp.builder().sex("ÄÐ").email("1@qq.com").build());
         System.out.println(empList);
     }
+
+    @Test
+    public void test7() {
+        Integer[] eids = {7,8};
+        System.out.println(dynamicSQLMapper.deleteMoreByOr(eids));
+    }
 }
