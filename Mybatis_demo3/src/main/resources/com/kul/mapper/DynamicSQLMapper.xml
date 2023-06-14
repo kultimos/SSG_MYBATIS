@@ -86,4 +86,35 @@
         </trim>
     </select>
 
+
+<!--  这里的choose when otherwise是一套组合使用的标签,choose 和 otherwise并没有其他属性,只有when有test属性
+      这里test的代码写法跟if标签一样
+      但是代码运行时逻辑有很大区别,
+      if标签是依次筛查每一个条件,如果当前条件满足,就会执行,然后继续筛查下一个条件
+      而choose标签是依次筛查每一个条件,只要有一个条件满足,就不会在继续筛查下一个条件,代码筛查逻辑就终止了,就直接使用当前条件进行sql查询了,不会再去筛查其他条件了
+      choose when otherwise可以理解为是 if else if else 的简化版,有一个满足就结束
+      when至少要有一个;
+      otherwise可以没有,至多只能有一个
+ -->
+    <select id="getEmpByChoose" resultMap="com.kul.mapper.EmpMapper.empResultMap">
+        select * from t_emp
+        <where>
+            <choose>
+                <when test="eid != null and eid != ''">
+                   and eid=#{eid}
+                </when>
+                <when test="age != null and age != ''">
+                    and sex=#{sex}
+                </when>
+                <when test="empName != null and empName != ''">
+                    and emp_name=#{empName}
+                </when>
+                <otherwise>
+                    did = 1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+
 </mapper>

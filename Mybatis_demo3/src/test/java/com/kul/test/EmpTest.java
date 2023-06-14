@@ -65,4 +65,10 @@ public class EmpTest {
         List<Emp> empList = dynamicSQLMapper.getEmpByConditionThree(Emp.builder().sex("ÄÐ").email("1@qq.com").build());
         System.out.println(empList);
     }
+
+    @Test
+    public void test6() {
+        List<Emp> empList = dynamicSQLMapper.getEmpByChoose(Emp.builder().sex("ÄÐ").email("1@qq.com").build());
+        System.out.println(empList);
+    }
 }
