@@ -57,4 +57,33 @@
         </where>
     </select>
 
+
+<!--  trim标签
+      prefix/suffix: 将trim标签中的内容前面/后面加上指定的内容
+      suffixOverrides/prefixOverrides: 将trim标签中的内容前面/后面指定的内容去掉
+      注意:这里的添加和删除针对的是trim这个整体,即是在trim标签的最开始和最最后添加或删除指定内容,而不是trim标签中的每条内容都会被添加或删除指定内容
+      可以理解为trim是在sql语句已经完全形成后,再根据配置的属性内容对整个sql语句进行添加或删除指定内容
+      而当基础sql后没有任何内容时,trim标签跟where标签一样,不会有任何效果
+-->
+    <select id="getEmpByConditionThree" parameterType="Emp" resultMap="com.kul.mapper.EmpMapper.empResultMap">
+        select * from t_emp
+        <trim prefix="where" suffix="" prefixOverrides="" suffixOverrides="and|or"      >
+            <if test="eid != null and eid != ''">
+                 eid=#{eid} and
+            </if>
+            <if test="age != null and age != ''">
+                 age=#{age}
+            </if>
+            <if test="sex != null and sex != ''">
+                 sex=#{sex} and
+            </if>
+            <if test="email != null and email != ''">
+                 email=#{email} and
+            </if>
+            <if test="empName != null and empName != ''">
+                 emp_name=#{empName} and
+            </if>
+        </trim>
+    </select>
+
 </mapper>
