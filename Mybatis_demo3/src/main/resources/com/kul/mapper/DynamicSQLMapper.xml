@@ -153,4 +153,18 @@
 
     </insert>
 
+
+
+<!--  sql片段：针对常见查询字段的封装和引用
+      封装： <sql id="empData"> eid,emp_name,age,sex,email </sql>
+      引用： select <include refid="empData"></include> from t_emp
+-->
+    <sql id="empData">
+        eid,emp_name,age,sex,email
+    </sql>
+
+    <select id="sqlEmp" resultMap="com.kul.mapper.EmpMapper.empResultMap">
+        select <include refid="empData"></include> from t_emp
+    </select>
+
 </mapper>

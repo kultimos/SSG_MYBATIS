@@ -91,4 +91,9 @@ public class EmpTest {
         int a = dynamicSQLMapper.insertMoreByArray(list);
         System.out.println(a);
     }
+
+    @Test
+    public void test9(){
+        dynamicSQLMapper.sqlEmp().forEach(x -> System.out.println(x));
+    }
 }
