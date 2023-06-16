@@ -16,7 +16,7 @@ public class Emp {
 
     private String empName;
 
-    private String age;
+    private Integer age;
 
     private String sex;
 

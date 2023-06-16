@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Mapper接口对应映射文件
+    mapper接口和映射文件要保持两个一致
+    1.mapper接口全类名和映射文件namespace一致
+    2.mapper接口的方法名和映射文件sql的id保持一致
+-->
+<mapper namespace="com.kul.mapper.CacheMapper">
+    <select id="getEmpById" resultMap="com.kul.mapper.EmpMapper.empResultMap">
+        select * from t_emp where eid=#{eid}
+    </select>
+
+<!--  这里需要注意通过 useGeneratedKeys和keyProperty 配置主键自动自增需要有一个前提:就是数据库中该表的主键是可以自增的,这个需要在mysql中勾选
+      否则即使配置了参数也无法实现自增
+-->
+    <insert id="insertEmp" useGeneratedKeys="true" keyProperty="eid">
+        insert into t_emp(eid,emp_name,age,sex,email) values (null,#{empName},#{age},#{sex},#{email})
+    </insert>
+</mapper>
