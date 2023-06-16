@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <excludeFromCompile>
       <directory url="file://$PROJECT_DIR$/Mybatis_demo3/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/Mybatis_MBG/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -11,6 +12,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="MyBatis_demo1" />
         <module name="Mybatis_demo3" />
+        <module name="Mybatis_MBG" />
       </profile>
     </annotationProcessing>
   </component>
