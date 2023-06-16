@@ -120,7 +120,9 @@ public class EmpTest {
         //这里我们睡眠10s并且再过程中修改了数据库的数据,但是第二次查询的时候还是会从缓存中取;所以两次查询结果一样
         System.out.println(cacheMapper.getEmpById(23));
         Thread.sleep(10000);
-        System.out.println(cacheMapper.getEmpById(23));
+        new Thread(() -> {
+            System.out.println(cacheMapper.getEmpById(23));
+        }).start();
     }
 
     /**
@@ -166,7 +168,55 @@ public class EmpTest {
         System.out.println(cacheMapper.insertEmp(Emp.builder().empName(UUID.randomUUID().toString()).sex("女").email("sa")
                 .age(58).build()));
         Thread.sleep(10000);
-        System.out.println(cacheMapper.getEmpById(23));
+        new Thread(() -> {
+            System.out.println(cacheMapper.getEmpById(23));
+        }).start();
     }
 
+
+    /**
+     * 二级缓存
+     * 在我们没有关闭/提交sqlSession的情况下,查询到的数据会被保存到一级缓存中
+     * 当我们关闭/提交sqlSession的时候,一级缓存中的数据会被保存到二级缓存中
+     *
+     * 二级缓存开启条件：
+     * 1.在核心配置文件中,设置全局配置参数<setting name="cacheEnabled" value="true"/> , 默认为true,不需要设置
+     * 2.在映射文件mapper.xml中,配置<cache/>标签
+     * 3.二级缓存必须在SqlSession关闭或提交之后才会生效
+     * 4.查询的数据所转换的实体类类型必须实现序列化接口
+     *
+     * 二级缓存失效的情况：
+     * 两次查询之间执行了增删改操作,会使一级缓存、二级缓存都失效
+     *
+     * mybatis缓存查询的顺序：
+     * 1.先看二级缓存中有没有数据,如果有就直接返回
+     * 2.如果二级缓存中没有数据,就去一级缓存中查看有没有数据,如果有就直接返回
+     * 3.如果一级缓存中没有数据,就去数据库中查询,并且将查询到的数据保存到一级缓存中
+     * 注:sqlSession关闭后,将一级缓存中的数据保存到二级缓存中
+     */
+    @Test
+    public void testTwoCache()   {
+        InputStream is = null;
+        try {
+            is = Resources.getResourceAsStream("mybatis-config.xml");
+            SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+
+
+            SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(is);
+            SqlSession sqlSession1 = sqlSessionFactory.openSession(true);
+            CacheMapper cacheMapper1 = sqlSession1.getMapper(CacheMapper.class);
+            System.out.println(cacheMapper1.getEmpById(23));
+            sqlSession1.close();
+            Thread.sleep(10000);
+            SqlSession sqlSession2 = sqlSessionFactory.openSession(true);
+            CacheMapper cacheMapper2 = sqlSession2.getMapper(CacheMapper.class);
+            System.out.println(cacheMapper2.getEmpById(23));
+            sqlSession2.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }

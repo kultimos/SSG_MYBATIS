@@ -8,6 +8,7 @@
     2.mapper接口的方法名和映射文件sql的id保持一致
 -->
 <mapper namespace="com.kul.mapper.CacheMapper">
+    <cache></cache>
     <select id="getEmpById" resultMap="com.kul.mapper.EmpMapper.empResultMap">
         select * from t_emp where eid=#{eid}
     </select>
